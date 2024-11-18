@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { GenerateSW } = require('workbox-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
@@ -28,12 +28,19 @@ module.exports = {
     ],
   },
   plugins: [
-    // new InjectManifest({
-    //   // mengarahkan ke berkas service worker yang dituju.
-    //   swSrc: path.resolve(__dirname, 'src/scripts/sw.js'),
-    //   swDest: './sw.js',
-    // }),
-    new GenerateSW({
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.resolve(__dirname, 'src/templates/index.html'),
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/public/'),
+          to: path.resolve(__dirname, 'dist/'),
+        },
+      ],
+    }),
+    new WorkboxWebpackPlugin.GenerateSW({
       // mendefinisikan lokasi sekaligus nama dari berkas service worker yang akan dihasilkan. Diberikan nama "service-worker.js" secara default jika tidak didefinisikan.
       swDest: './sw.bundle.js',
       runtimeCaching: [
@@ -50,18 +57,6 @@ module.exports = {
           options: {
             cacheName: 'themoviedb-image-api',
           },
-        },
-      ],
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.resolve(__dirname, 'src/templates/index.html'),
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'src/public/'),
-          to: path.resolve(__dirname, 'dist/'),
         },
       ],
     }),
