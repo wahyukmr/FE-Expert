@@ -1,0 +1,17 @@
+@media screen and (min-width: 900px) {
+  .headline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 500) {
+  #drawer {
+    position: relative;
+    transform: translate(0, 0);
+  }
+
+  #hamburger {
+    display: none;
+  }
+}
