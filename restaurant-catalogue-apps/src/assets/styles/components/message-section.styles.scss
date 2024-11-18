@@ -1,0 +1,14 @@
+@use "../utils/variables" as v;
+@use "../utils/mixins" as m;
+@use "../utils/functions" as f;
+
+@include m.box-sizing-inherit;
+
+.message {
+  top: 2rem;
+  @include m.center-element;
+
+  &__content {
+    text-align: center;
+  }
+}

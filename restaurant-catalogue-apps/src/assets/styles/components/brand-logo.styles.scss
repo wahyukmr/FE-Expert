@@ -1,0 +1,33 @@
+@use "../utils/mixins" as m;
+@use "../utils/functions" as f;
+@use "../utils/variables" as v;
+
+@include m.box-sizing-inherit;
+@include m.focus-style;
+
+.brand-logo {
+  display: inline-block;
+  @include m.link-reset-style;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 2px solid v.$primary-100;
+    outline-offset: 2px;
+  }
+
+  &__img {
+    vertical-align: middle;
+    min-height: f.rem(44);
+    @include m.image-style(f.rem(100), auto);
+
+    @include m.breakpoint(small, min-width) {
+      @include m.image-style(f.rem(125), auto);
+    }
+    @include m.breakpoint(large, min-width) {
+      @include m.image-style(f.rem(150), auto);
+    }
+  }
+}

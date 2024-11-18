@@ -1,0 +1,22 @@
+@use "../utils/variables" as v;
+@use "../utils/mixins" as m;
+@use "../utils/functions" as f;
+
+@include m.box-sizing-inherit;
+
+.favorite-section {
+  height: f.rem(300);
+  margin: v.$spacing-64 auto v.$spacing-80;
+
+  &__container {
+    text-align: center;
+    @include m.container-style(v.$spacing-24, f.rem(800));
+  }
+  &__heading {
+    color: v.$primary-100;
+    margin-bottom: v.$spacing-32;
+    @include m.heading-style(h1);
+  }
+  &__text {
+  }
+}

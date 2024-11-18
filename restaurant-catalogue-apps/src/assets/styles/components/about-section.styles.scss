@@ -1,0 +1,100 @@
+@use "../utils/variables" as v;
+@use "../utils/mixins" as m;
+@use "../utils/functions" as f;
+
+@include m.box-sizing-inherit;
+@include m.focus-style;
+
+.about-section {
+  color: v.$text-100;
+  margin: v.$spacing-64 auto v.$spacing-80;
+
+  &__container {
+    @include m.container-style(v.$spacing-24, f.rem(800));
+  }
+
+  &__heading--primary {
+    position: relative;
+    color: v.$primary-100;
+    text-align: center;
+    margin-bottom: v.$spacing-32;
+    animation-delay: 0.2s;
+    @include m.heading-style(h1);
+
+    &::after {
+      content: "";
+      display: block;
+      width: f.rem(60);
+      height: 3px;
+      background-color: v.$accent-100;
+      margin: v.$spacing-16 auto 0;
+      border-radius: 2px;
+    }
+  }
+
+  &__heading--secondary {
+    color: v.$primary-200;
+    margin-top: v.$spacing-48;
+    margin-bottom: v.$spacing-16;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid v.$primary-300;
+    animation-delay: 0.4s;
+    @include m.heading-style(h2);
+
+    &::before {
+      content: "◆ ";
+      color: v.$accent-200;
+    }
+  }
+
+  &__text {
+    font-size: v.$default-font-size;
+    margin-bottom: 1.2em;
+    animation-delay: 0.6s;
+  }
+
+  &__descriptions {
+    background: v.$bg-200;
+    padding: 1em;
+    border-radius: 2px;
+    list-style-type: disc;
+    color: v.$primary-300;
+    animation-delay: 0.6s;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  &__description {
+    font-size: v.$default-font-size;
+    color: v.$text-100;
+    margin-left: 1.5em;
+  }
+
+  &__anchor {
+    color: v.$primary-200;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+      color: v.$primary-100;
+      border-color: v.$primary-100;
+    }
+  }
+
+  &__heading--primary,
+  &__heading--secondary,
+  &__text,
+  &__descriptions {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

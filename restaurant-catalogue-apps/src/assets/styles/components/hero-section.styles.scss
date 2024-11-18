@@ -1,0 +1,101 @@
+@use "../utils/variables" as v;
+@use "../utils/mixins" as m;
+@use "../utils/functions" as f;
+
+@include m.box-sizing-inherit;
+@include m.focus-style;
+
+.hero {
+  position: relative;
+  height: f.rem(450);
+
+  @include m.container-style(0, v.$container-default-max-width);
+  @include m.breakpoint(small, min-width) {
+    height: f.rem(600);
+  }
+  @include m.breakpoint(medium, min-width) {
+    height: f.rem(750);
+  }
+
+  &__image-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle, rgba(95, 20, 21, 0.5) 30%, rgb(76, 0, 0) 90%);
+      pointer-events: none;
+    }
+  }
+
+  &__image {
+    object-fit: cover;
+    @include m.image-style(100%, 100%);
+  }
+
+  &__content {
+    text-align: center;
+    width: calc(100% - 5rem);
+    max-width: f.rem(800);
+    @include m.center-element;
+  }
+  &__heading {
+    margin-bottom: v.$spacing-8;
+    @include m.heading-style(h1);
+
+    &--highlight {
+      color: v.$primary-300;
+    }
+  }
+  &__description {
+    font-size: v.$subHeading-font-size;
+    font-weight: 500;
+    margin-bottom: v.$spacing-48;
+  }
+  &__cta-button {
+    font-weight: bold;
+    height: 48px;
+    padding: 0 30px;
+    color: v.$bg-100;
+    background: linear-gradient(135deg, v.$primary-200, v.$primary-100);
+    border: none;
+    border-radius: 30px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(95, 20, 21, 0.15);
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    @include m.button-style;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(95, 20, 21, 2);
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: skewX(-45deg);
+      transition: 0.5s;
+    }
+  }
+}
