@@ -1,5 +1,5 @@
 import { CONFIG } from '../global/config';
-import NotificationHelper from './notification-helper';
+import NotificationHelper from './notification-helper.js';
 
 const WebSocketInitiator = {
   init(url) {
