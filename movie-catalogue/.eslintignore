@@ -1,0 +1,4 @@
+# Abaikan file yang tidak ingin dilinting oleh ESLint
+node_modules/
+build/
+dist/

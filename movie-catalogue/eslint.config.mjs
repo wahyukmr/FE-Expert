@@ -1,20 +1,22 @@
 import pluginJs from '@eslint/js';
 import daStyle from 'eslint-config-dicodingacademy';
+import prettierConfig from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   pluginJs.configs.recommended,
   daStyle,
-  eslintPluginPrettierRecommended,
-
+  prettierConfig,
   {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
     rules: {
-      'prettier/prettier': 'error',
-      'linebreak-style': ['error', 'unix'],
-      properties: 'never',
+      camelcase: ['error', { properties: 'never' }],
     },
   },
 ];
