@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: white;
   min-height: 100vh;
   display: flex;
@@ -205,6 +205,35 @@ main {
 }
 
 /*
+  Button
+*/
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #db0000;
+  border: 1px solid #770000;
+  border-radius: 4px;
+
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #db0000bb;
+}
+.btn:active {
+  background-color: #db0000dd;
+}
+.btn:focus-visible {
+  outline: 3px solid #db000055;
+}
+
+/*
   Footer
 */
 
@@ -212,7 +241,15 @@ footer {
   padding: 16px;
 }
 
+footer #footerTools {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
 footer p {
+  margin-top: 16px;
   text-align: center;
   color: #aaaaaa;
 }
