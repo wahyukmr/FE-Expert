@@ -1,6 +1,6 @@
-@use "variables" as v;
-@use "functions" as f;
-@use "sass:map";
+@use 'variables' as v;
+@use 'functions' as f;
+@use 'sass:map';
 
 @mixin box-sizing-inherit {
   :host *,
@@ -38,12 +38,12 @@
 }
 
 @mixin focus-style {
-  button:focus,
-  a:focus,
-  [role="button"]:focus,
-  [role="link"]:focus,
-  input:focus,
-  textarea:focus {
+  button:focus-visible,
+  a:focus-visible,
+  [role='button']:focus-visible,
+  [role='link']:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
     outline: 2px solid v.$primary-100;
     outline-offset: 4px;
   }
@@ -57,8 +57,8 @@
 
 @mixin button-style() {
   display: inline-block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: inherit;
   cursor: pointer;
 }
 
@@ -110,15 +110,15 @@
 
   // mobile-first
   @if $type == h1 {
-    font-family: "Namdhinggo-Bold", serif;
+    font-family: 'Namdhinggo-Bold', serif;
     font-size: clamp(f.rem(28), f.rem(20) + 3vw, f.rem(56));
   }
   @if $type == h2 {
-    font-family: "Namdhinggo-SemiBold", serif;
+    font-family: 'Namdhinggo-SemiBold', serif;
     font-size: clamp(f.rem(24), f.rem(16) + 2.5vw, f.rem(44));
   }
   @if $type == h3 {
-    font-family: "Namdhinggo-SemiBold", serif;
+    font-family: 'Namdhinggo-SemiBold', serif;
     font-size: clamp(f.rem(20), f.rem(14) + 2vw, f.rem(32));
   }
 }

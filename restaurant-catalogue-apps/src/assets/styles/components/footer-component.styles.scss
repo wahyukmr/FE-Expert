@@ -1,19 +1,19 @@
-@use "../utils/variables" as v;
-@use "../utils/mixins" as m;
-@use "../utils/functions" as f;
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
 
 @include m.box-sizing-inherit;
 @include m.focus-style;
 
 .footer {
-  height: f.rem(350);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   row-gap: v.$spacing-32;
   align-items: center;
   padding-inline: v.$spacing-24;
-  padding-block: v.$spacing-32;
+  padding-top: v.$spacing-64;
+  padding-bottom: v.$spacing-32;
   background: v.$bg-200;
 
   @include m.breakpoint(small, min-width) {
@@ -27,13 +27,13 @@
     flex-wrap: wrap;
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       width: 100%;
       max-width: f.rem(800);
       height: 1px;
       background-color: v.$bg-300;
-      margin: v.$spacing-32 auto 0;
+      margin: v.$spacing-96 auto 0;
       border-radius: 2px;
     }
 

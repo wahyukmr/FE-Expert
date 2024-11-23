@@ -1,5 +1,5 @@
-@use "../utils/variables" as v;
-@use "../utils/mixins" as m;
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
 
 @include m.focus-style;
 
@@ -11,10 +11,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: v.$default-font-size;
   line-height: v.$default-line-height;
   background: v.$bg-100;
+  background: -moz-radial-gradient(circle, v.$bg-200 0%, v.$bg-100 50%);
+  background: -webkit-radial-gradient(circle, v.$bg-200 0%, v.$bg-100 50%);
+  background: radial-gradient(circle, v.$bg-200 0%, v.$bg-100 50%);
   color: v.$text-100;
 }
 
@@ -31,7 +34,7 @@ body {
   @include m.link-reset-style;
 }
 
-.skip-to-content:focus {
+.skip-to-content:focus-visible {
   top: 10px;
   left: 10px;
 }

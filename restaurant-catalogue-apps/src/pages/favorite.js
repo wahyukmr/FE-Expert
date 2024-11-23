@@ -1,11 +1,11 @@
-import styles from "../assets/styles/components/favorite-section.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import styles from '../assets/styles/components/favorite-page.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
-class FavoriteSection extends HTMLElement {
+class FavoritePage extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
@@ -26,4 +26,4 @@ class FavoriteSection extends HTMLElement {
   }
 }
 
-customElements.define("favorite-section", FavoriteSection);
+customElements.define('favorite-page', FavoritePage);

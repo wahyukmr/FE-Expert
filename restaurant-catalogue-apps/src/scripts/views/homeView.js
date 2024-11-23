@@ -1,53 +1,64 @@
 class HomeView {
   constructor() {
-    this._main = document.querySelector("main-component").shadowRoot.querySelector("main");
+    this._main = document.querySelector('main-component').shadowRoot.querySelector('main');
+  }
+
+  renderHomePage() {
+    this._main.innerHTML = '';
+    const homePageContent = document.createElement('home-page');
+    this._main.appendChild(homePageContent);
   }
 
   renderLoading() {
-    const loadingElement = document.createElement("loader-section");
-    this._main.appendChild(loadingElement);
-  }
+    const { restoListId } = this._restaurantListSelector();
 
-  removeLoading() {
-    const loadingElement = this._main.querySelector("loader-section");
-    loadingElement.remove();
+    restoListId.innerHTML = '';
+    const loadingElement = document.createElement('loader-section');
+    restoListId.appendChild(loadingElement);
   }
 
   renderMessage(message) {
-    this._main.innerHTML = "";
-    const messageElement = document.createElement("message-section");
+    const { restoListId } = this._restaurantListSelector();
+
+    restoListId.innerHTML = '';
+    const messageElement = document.createElement('message-section');
     messageElement.textMessage = message;
-    this._main.appendChild(messageElement);
+    restoListId.appendChild(messageElement);
   }
 
   renderRestaurant(restaurants) {
-    const restoListElement = this._main.querySelector("restaurant-list-section");
-    const restaurantList = restoListElement.shadowRoot.querySelector("#restaurantList");
+    const { restoListId } = this._restaurantListSelector();
 
-    if (restaurantList) {
-      const restoItemElements = restaurants.map((restaurant) => {
-        const restoItem = document.createElement("restaurant-item");
-        restoItem.dataRestaurant = restaurant;
-        return restoItem;
-      });
+    const restoItemElements = restaurants.map((restaurant) => {
+      const restoItem = document.createElement('restaurant-item');
+      restoItem.dataRestaurant = restaurant;
+      return restoItem;
+    });
 
-      restaurantList.innerHTML = "";
-      restaurantList.append(...restoItemElements);
-    }
+    restoListId.innerHTML = '';
+    restoListId.append(...restoItemElements);
   }
 
   heroCtaClickBtnHandler() {
-    const restoListElement = this._main.querySelector("restaurant-list-section");
-    this._heroSection = this._main.querySelector("hero-section");
+    const { heroSection, restoListSection } = this._restaurantListSelector();
 
-    this._heroSection.addEventListener("heroCtaBtnClick", () => {
-      if (restoListElement) {
-        restoListElement.focus();
-        restoListElement.scrollIntoView({ behavior: "smooth" });
+    heroSection.addEventListener('heroCtaBtnClick', () => {
+      if (restoListSection) {
+        restoListSection.focus();
+        restoListSection.scrollIntoView({ behavior: 'smooth' });
       } else {
-        this.renderMessage("data is not available");
+        this.renderMessage('data is not available');
       }
     });
+  }
+
+  _restaurantListSelector() {
+    const home = this._main.querySelector('home-page');
+    const restoListSection = home.shadowRoot.querySelector('restaurant-list-section');
+    const restoListId = restoListSection.shadowRoot.querySelector('#restaurantList');
+    const heroSection = home.shadowRoot.querySelector('hero-section');
+
+    return { restoListSection, restoListId, heroSection };
   }
 }
 

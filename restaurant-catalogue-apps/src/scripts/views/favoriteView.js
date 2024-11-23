@@ -1,13 +1,13 @@
 class FavoriteView {
   constructor() {
-    this._main = document.querySelector("main-component").shadowRoot.querySelector("main");
-    this._renderFavorite();
+    this._main = document.querySelector('main-component').shadowRoot.querySelector('main');
+    this._renderFavoritePage();
   }
 
-  _renderFavorite() {
-    this._main.innerHTML = "";
-    const notFoundContent = document.createElement("favorite-section");
-    this._main.appendChild(notFoundContent);
+  _renderFavoritePage() {
+    this._main.innerHTML = '';
+    const favoritePageContent = document.createElement('favorite-page');
+    this._main.appendChild(favoritePageContent);
   }
 }
 

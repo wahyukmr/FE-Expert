@@ -1,9 +1,10 @@
-import { emptyContent } from "../utils/emptyContent";
+import { emptyContent } from '../utils/emptyContent';
 
 class MainComponent extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+
     this.render();
   }
 
@@ -16,4 +17,4 @@ class MainComponent extends HTMLElement {
   }
 }
 
-customElements.define("main-component", MainComponent);
+customElements.define('main-component', MainComponent);

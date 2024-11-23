@@ -1,20 +1,20 @@
-const { merge } = require("webpack-merge");
-const path = require("path");
-const glob = require("glob");
-const common = require("./webpack.common");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const { merge } = require('webpack-merge');
+const path = require('path');
+const glob = require('glob');
+const common = require('./webpack.common');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: 'production',
   output: {
-    filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   optimization: {
     minimizer: [
       `...`,
@@ -32,7 +32,7 @@ module.exports = merge(common, {
         },
         generator: [
           {
-            preset: "webp",
+            preset: 'webp',
             implementation: ImageMinimizerPlugin.sharpGenerate,
             options: {
               encodeOptions: {
@@ -46,7 +46,7 @@ module.exports = merge(common, {
       }),
     ],
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
     },
   },
   module: {
@@ -56,42 +56,42 @@ module.exports = merge(common, {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              presets: ["@babel/preset-env"],
+              presets: ['@babel/preset-env'],
             },
           },
         ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
         generator: {
-          filename: "assets/fonts/[name].[hash][ext]",
+          filename: 'assets/fonts/[name].[hash][ext]',
         },
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
         parser: {
           dataUrlCondition: {
             maxSize: 8 * 1024, // 8 KB; mengubah gambar kecil menjadi inline
           },
         },
         generator: {
-          filename: "assets/images/[name].[hash][ext]",
+          filename: 'assets/images/[name].[hash][ext]',
         },
       },
       {
         test: /styles\.s[ac]ss$/i,
         exclude: /node_modules/,
-        type: "asset/source",
+        type: 'asset/source',
         use: [
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sassOptions: {
-                outputStyle: "compressed",
+                outputStyle: 'compressed',
               },
               sourceMap: true,
             },
@@ -104,16 +104,16 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sassOptions: {
-                outputStyle: "compressed",
+                outputStyle: 'compressed',
               },
               sourceMap: true,
             },
@@ -124,11 +124,11 @@ module.exports = merge(common, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-      chunkFilename: "[id].[contenthash].css",
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css',
     }),
     new PurgeCSSPlugin({
-      paths: glob.sync(`${path.resolve(__dirname, "src")}/**/*`, { nodir: true }),
+      paths: glob.sync(`${path.resolve(__dirname, 'src')}/**/*`, { nodir: true }),
     }),
   ],
 });

@@ -1,16 +1,16 @@
-@use "../utils/variables" as v;
-@use "../utils/mixins" as m;
-@use "../utils/functions" as f;
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
 
 @include m.box-sizing-inherit;
 @include m.focus-style;
 
 .about-section {
   color: v.$text-100;
-  margin: v.$spacing-64 auto v.$spacing-80;
+  margin: v.$spacing-64 auto v.$spacing-96;
 
   &__container {
-    @include m.container-style(v.$spacing-24, f.rem(800));
+    @include m.container-style(v.$spacing-24, f.rem(900));
   }
 
   &__heading--primary {
@@ -22,7 +22,7 @@
     @include m.heading-style(h1);
 
     &::after {
-      content: "";
+      content: '';
       display: block;
       width: f.rem(60);
       height: 3px;
@@ -34,29 +34,35 @@
 
   &__heading--secondary {
     color: v.$primary-200;
-    margin-top: v.$spacing-48;
     margin-bottom: v.$spacing-16;
-    padding-bottom: 0.2em;
+    padding-bottom: 0.1em;
     border-bottom: 2px solid v.$primary-300;
     animation-delay: 0.4s;
     @include m.heading-style(h2);
 
+    &:first-of-type {
+      margin-top: v.$spacing-80;
+    }
+
+    &:not(:first-of-type) {
+      margin-top: v.$spacing-48;
+    }
+
     &::before {
-      content: "◆ ";
-      color: v.$accent-200;
+      content: '◆ ';
+      font-size: clamp(f.rem(20), f.rem(14) + 2vw, f.rem(32));
+      color: v.$primary-200;
     }
   }
 
   &__text {
     font-size: v.$default-font-size;
-    margin-bottom: 1.2em;
     animation-delay: 0.6s;
   }
 
   &__descriptions {
-    background: v.$bg-200;
-    padding: 1em;
-    border-radius: 2px;
+    padding: 0.6em;
+    border-radius: 1.5px;
     list-style-type: disc;
     color: v.$primary-300;
     animation-delay: 0.6s;
@@ -66,7 +72,7 @@
   &__description {
     font-size: v.$default-font-size;
     color: v.$text-100;
-    margin-left: 1.5em;
+    margin-left: 2em;
   }
 
   &__anchor {

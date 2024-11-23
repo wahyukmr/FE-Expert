@@ -1,11 +1,11 @@
-import styles from "../assets/styles/components/about-section.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import styles from '../assets/styles/components/about-page.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
-class AboutSection extends HTMLElement {
+class Aboutpage extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
@@ -41,7 +41,9 @@ class AboutSection extends HTMLElement {
 
           <h2 class="about-section__heading--secondary">About the Developer</h2>
           <p class="about-section__text">Developed with a passion for both food and technology, this catalog reflects my dedication to creating an efficient yet enjoyable browsing experience. Every detail, from layout to functionality, is carefully crafted to provide a top-notch user experience.</p>
-
+          
+          <br/>
+          
           <p class="about-section__text">Connect with me on <a href="https://linkedin.com/in/wahyukmr" target="_blank" class="about-section__anchor" aria-label="Visit my LinkedIn profile">LinkedIn</a> to learn more about my work and future projects.</p>
         </div>
       </section>
@@ -49,4 +51,4 @@ class AboutSection extends HTMLElement {
   }
 }
 
-customElements.define("about-section", AboutSection);
+customElements.define('about-page', Aboutpage);

@@ -1,11 +1,11 @@
-@use "../utils/variables" as v;
-@use "../utils/mixins" as m;
-@use "../utils/functions" as f;
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
 
 @include m.box-sizing-inherit;
 
 .restaurant-list {
-  margin: v.$spacing-80 auto;
+  margin: v.$spacing-96 auto;
 
   &__header {
     text-align: center;

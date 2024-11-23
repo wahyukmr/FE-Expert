@@ -1,13 +1,13 @@
 class AboutUsView {
   constructor() {
-    this._main = document.querySelector("main-component").shadowRoot.querySelector("main");
-    this._renderFavorite();
+    this._main = document.querySelector('main-component').shadowRoot.querySelector('main');
+    this._renderAboutUsPage();
   }
 
-  _renderFavorite() {
-    this._main.innerHTML = "";
-    const notFoundContent = document.createElement("about-section");
-    this._main.appendChild(notFoundContent);
+  _renderAboutUsPage() {
+    this._main.innerHTML = '';
+    const aboutUsPageContent = document.createElement('about-page');
+    this._main.appendChild(aboutUsPageContent);
   }
 }
 

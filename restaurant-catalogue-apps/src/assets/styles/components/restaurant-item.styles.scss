@@ -1,6 +1,6 @@
-@use "../utils/variables" as v;
-@use "../utils/mixins" as m;
-@use "../utils/functions" as f;
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
 
 @include m.box-sizing-inherit;
 
@@ -96,6 +96,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
+    line-clamp: 3;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
@@ -107,7 +108,7 @@
     font-weight: 600;
 
     &::before {
-      content: "⭐";
+      content: '⭐';
       margin-right: 0.3rem;
     }
   }

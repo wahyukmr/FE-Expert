@@ -1,3 +1,3 @@
-import "./footer-component.js";
-import "./header-component.js";
-import "./main-component.js";
+import './footer.js';
+import './header.js';
+import './main.js';
