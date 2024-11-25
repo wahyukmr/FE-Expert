@@ -12,12 +12,16 @@
   row-gap: v.$spacing-32;
   align-items: center;
   padding-inline: v.$spacing-24;
-  padding-top: v.$spacing-64;
+  padding-top: v.$spacing-48;
   padding-bottom: v.$spacing-32;
   background: v.$bg-200;
 
   @include m.breakpoint(small, min-width) {
     padding-inline: calc(4vw + v.$spacing-24);
+  }
+
+  @include m.breakpoint(large, min-width) {
+    padding-top: v.$spacing-64;
   }
 
   &__brand {
@@ -33,13 +37,16 @@
       max-width: f.rem(800);
       height: 1px;
       background-color: v.$bg-300;
-      margin: v.$spacing-96 auto 0;
+      margin: v.$spacing-80 auto 0;
       border-radius: 2px;
+
+      @include m.breakpoint(large, min-width) {
+        margin: v.$spacing-96 auto 0;
+      }
     }
 
     &--description {
       flex: 0 1 80%;
-      font-size: v.$subHeading-font-size;
       color: v.$text-100;
       opacity: 0.9;
 

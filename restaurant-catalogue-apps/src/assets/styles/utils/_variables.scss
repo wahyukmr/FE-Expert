@@ -1,7 +1,7 @@
-@use "functions" as f;
+@use 'functions' as f;
 
 $default-font-size: clamp(f.rem(14), f.rem(12) + 1vw, f.rem(18));
-$subHeading-font-size: clamp(f.rem(12), f.rem(10) + 0.8vw, f.rem(16));
+$subHeading-font-size: clamp(f.rem(13), f.rem(10) + 0.8vw, f.rem(16));
 
 // LINE_HEIGHT
 $default-line-height: 1.6;

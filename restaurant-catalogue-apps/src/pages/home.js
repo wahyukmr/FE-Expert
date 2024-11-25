@@ -13,6 +13,7 @@ class HomePage extends HTMLElement {
 
     this._shadowRoot.innerHTML += `
       <hero-section></hero-section>
+      <features-section></features-section>
       <restaurant-list-section></restaurant-list-section>
       <testimonials-section></testimonials-section>
     `;

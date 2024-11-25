@@ -58,7 +58,7 @@
 @mixin button-style() {
   display: inline-block;
   font-family: 'Open Sans', sans-serif;
-  font-size: inherit;
+  font-size: v.$subHeading-font-size;
   cursor: pointer;
 }
 
@@ -116,10 +116,6 @@
   @if $type == h2 {
     font-family: 'Namdhinggo-SemiBold', serif;
     font-size: clamp(f.rem(24), f.rem(16) + 2.5vw, f.rem(44));
-  }
-  @if $type == h3 {
-    font-family: 'Namdhinggo-SemiBold', serif;
-    font-size: clamp(f.rem(20), f.rem(14) + 2vw, f.rem(32));
   }
 }
 

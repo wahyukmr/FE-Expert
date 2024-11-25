@@ -7,3 +7,4 @@ import './not-found-route-section.js';
 import './restaurant-item.js';
 import './restaurant-list-section.js';
 import './testimonials-section.js';
+import './features-section.js';
