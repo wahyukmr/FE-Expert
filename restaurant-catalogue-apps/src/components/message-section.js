@@ -1,13 +1,13 @@
-import styles from "../assets/styles/components/message-section.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import styles from '../assets/styles/components/message-section.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
 class MessageSection extends HTMLElement {
   _textMessage = null;
 
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
@@ -34,4 +34,4 @@ class MessageSection extends HTMLElement {
   }
 }
 
-customElements.define("message-section", MessageSection);
+customElements.define('message-section', MessageSection);

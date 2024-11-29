@@ -1,11 +1,11 @@
-import styles from "../assets/styles/components/restaurant-list-section.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import styles from '../assets/styles/components/restaurant-list-section.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
 class RestaurantListSection extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
@@ -24,4 +24,4 @@ class RestaurantListSection extends HTMLElement {
   }
 }
 
-customElements.define("restaurant-list-section", RestaurantListSection);
+customElements.define('restaurant-list-section', RestaurantListSection);

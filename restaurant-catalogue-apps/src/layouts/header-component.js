@@ -1,11 +1,11 @@
-import styles from "../assets/styles/components/header-component.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import styles from '../assets/styles/components/header-component.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
 class HeaderComponent extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
@@ -22,4 +22,4 @@ class HeaderComponent extends HTMLElement {
   }
 }
 
-customElements.define("header-component", HeaderComponent);
+customElements.define('header-component', HeaderComponent);

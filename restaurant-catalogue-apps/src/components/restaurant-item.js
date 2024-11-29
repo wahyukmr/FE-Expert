@@ -1,11 +1,11 @@
-import styles from "../assets/styles/components/restaurant-item.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import styles from '../assets/styles/components/restaurant-item.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
 class RestaurantItem extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this._dataRestaurant = {};
     this.render();
   }
@@ -27,12 +27,12 @@ class RestaurantItem extends HTMLElement {
     this._style.textContent = styles;
     this._shadowRoot.appendChild(this._style);
 
-    const container = document.createElement("div");
-    container.classList.add("restaurant-item");
+    const container = document.createElement('div');
+    container.classList.add('restaurant-item');
 
-    const imgElement = document.createElement("div");
-    imgElement.classList.add("restaurant-item__image");
-    imgElement.setAttribute("aria-label", `${name} restaurant image`);
+    const imgElement = document.createElement('div');
+    imgElement.classList.add('restaurant-item__image');
+    imgElement.setAttribute('aria-label', `${name} restaurant image`);
     imgElement.style.backgroundImage = `url(${pictureId})`;
 
     container.innerHTML += `
@@ -53,4 +53,4 @@ class RestaurantItem extends HTMLElement {
   }
 }
 
-customElements.define("restaurant-item", RestaurantItem);
+customElements.define('restaurant-item', RestaurantItem);

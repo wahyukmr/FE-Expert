@@ -1,12 +1,12 @@
-import notFoundIcon from "../../public/svg/404-page-not-found.svg";
-import styles from "../assets/styles/components/not-found-section.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import notFoundIcon from '../../public/svg/404-not-found.svg';
+import styles from '../assets/styles/components/not-found-route-page.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
-class NotFoundRouteSection extends HTMLElement {
+export default class NotFoundRoutePage extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
@@ -24,5 +24,3 @@ class NotFoundRouteSection extends HTMLElement {
     `;
   }
 }
-
-customElements.define("not-found-section", NotFoundRouteSection);

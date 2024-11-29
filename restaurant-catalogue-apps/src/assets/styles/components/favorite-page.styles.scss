@@ -1,6 +1,6 @@
-@use "../utils/variables" as v;
-@use "../utils/mixins" as m;
-@use "../utils/functions" as f;
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
 
 @include m.box-sizing-inherit;
 
@@ -16,7 +16,5 @@
     color: v.$primary-100;
     margin-bottom: v.$spacing-32;
     @include m.heading-style(h1);
-  }
-  &__text {
   }
 }

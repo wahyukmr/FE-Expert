@@ -1,34 +1,34 @@
-import heroImage1031 from "../assets/images/hero-image,w_1031.jpg";
-import heroImage1248 from "../assets/images/hero-image,w_1248.jpg";
-import heroImage1400 from "../assets/images/hero-image,w_1400.jpg";
-import heroImage200 from "../assets/images/hero-image,w_200.jpg";
-import heroImage555 from "../assets/images/hero-image,w_555.jpg";
-import heroImage815 from "../assets/images/hero-image,w_815.jpg";
-import styles from "../assets/styles/components/hero-section.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import heroImage1031 from '../assets/images/hero-image,w_1031.jpg';
+import heroImage1248 from '../assets/images/hero-image,w_1248.jpg';
+import heroImage1400 from '../assets/images/hero-image,w_1400.jpg';
+import heroImage200 from '../assets/images/hero-image,w_200.jpg';
+import heroImage555 from '../assets/images/hero-image,w_555.jpg';
+import heroImage815 from '../assets/images/hero-image,w_815.jpg';
+import styles from '../assets/styles/components/hero-section.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
 class HeroSection extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
   connectedCallback() {
     this._shadowRoot
-      .querySelector("#heroCtaBtn")
-      .addEventListener("click", this._onCtaButtonClick.bind(this));
+      .querySelector('#heroCtaBtn')
+      .addEventListener('click', this._onCtaButtonClick.bind(this));
   }
 
   disconnectedCallback() {
     this._shadowRoot
-      .querySelector("#heroCtaBtn")
-      .removeEventListener("click", this._onCtaButtonClick.bind(this));
+      .querySelector('#heroCtaBtn')
+      .removeEventListener('click', this._onCtaButtonClick.bind(this));
   }
 
   _onCtaButtonClick() {
-    this.dispatchEvent(new CustomEvent("heroCtaBtnClick"));
+    this.dispatchEvent(new CustomEvent('heroCtaBtnClick'));
   }
 
   render() {
@@ -75,4 +75,4 @@ class HeroSection extends HTMLElement {
   }
 }
 
-customElements.define("hero-section", HeroSection);
+customElements.define('hero-section', HeroSection);

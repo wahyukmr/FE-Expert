@@ -1,6 +1,6 @@
-@use "../utils/mixins" as m;
-@use "../utils/functions" as f;
-@use "../utils/variables" as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
+@use '../utils/variables' as v;
 
 @include m.box-sizing-inherit;
 @include m.focus-style;
@@ -11,11 +11,6 @@
 
   &:hover {
     text-decoration: none;
-  }
-
-  &:focus {
-    outline: 2px solid v.$primary-100;
-    outline-offset: 2px;
   }
 
   &__img {

@@ -1,11 +1,11 @@
-import styles from "../assets/styles/components/loader-section.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import styles from '../assets/styles/components/loader-section.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
 class LoaderSection extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
@@ -21,4 +21,4 @@ class LoaderSection extends HTMLElement {
   }
 }
 
-customElements.define("loader-section", LoaderSection);
+customElements.define('loader-section', LoaderSection);

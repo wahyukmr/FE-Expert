@@ -1,7 +1,7 @@
 import styles from '../assets/styles/components/favorite-page.styles.scss';
 import { emptyContent } from '../utils/emptyContent';
 
-class FavoritePage extends HTMLElement {
+export default class RestoDetailPage extends HTMLElement {
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: 'open' });
@@ -18,12 +18,10 @@ class FavoritePage extends HTMLElement {
     this._shadowRoot.innerHTML += `
       <section class="favorite-section">
         <div class="favorite-section__container">
-          <h1 class="favorite-section__heading">Your Favorite Restaurants</h1>
+          <h1 class="favorite-section__heading">Detail Restaurant</h1>
           <p class="favorite-section__text">This feature will be implemented in future submissions.</p>
         </div>
       </section>
     `;
   }
 }
-
-customElements.define('favorite-page', FavoritePage);

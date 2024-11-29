@@ -2,80 +2,113 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock-upgrade';
 
 class NavigationView {
   _smallBreakpoint = '(width <= 37.4988em)';
+  _elements;
+  _media;
 
-  constructor() {
-    this.body = document.querySelector('body');
-    this.header = document.querySelector('header-component').shadowRoot.querySelector('header');
-    this.navigationMenu = document.querySelector('navigation-menu');
-    this.mainComponent = document.querySelector('main-component');
-    this.skipToContent = document.querySelector('.skip-to-content');
-    this.brandLogo = document.querySelector('brand-logo');
-    this.btnOpen = this.navigationMenu.shadowRoot.querySelector('#btnOpen');
-    this.btnClose = this.navigationMenu.shadowRoot.querySelector('#btnClose');
-    this.topNavMenu = this.navigationMenu.shadowRoot.querySelector('.topnav__menu');
-    this.media = window.matchMedia(this._smallBreakpoint);
+  constructor({
+    bodyElement,
+    headerElement,
+    mainElement,
+    navigationMenuElement,
+    brandLogoElement,
+    skipToContentButton,
+  }) {
+    this._elements = {
+      body: bodyElement,
+      header: headerElement,
+      main: mainElement,
+      skipToContent: skipToContentButton,
+      navigationMenu: navigationMenuElement,
+      brandLogo: brandLogoElement,
+      btnOpen: navigationMenuElement.shadowRoot.querySelector('#btnOpen'),
+      btnClose: navigationMenuElement.shadowRoot.querySelector('#btnClose'),
+      topNavMenu: navigationMenuElement.shadowRoot.querySelector('.topnav__menu'),
+    };
+    this._media = window.matchMedia(this._smallBreakpoint);
+  }
 
-    this._setupTopNav(this.media);
+  initialize() {
+    this._updateTopNavMenuState(this._media.matches);
     this._addEventListeners();
   }
 
   _addEventListeners() {
-    window.addEventListener('scroll', () => this._headerScrollHandler());
-    this.media.addEventListener('change', (e) => this._setupTopNav(e));
-    this.navigationMenu.addEventListener('open-menu', this._openMobileMenu.bind(this));
-    this.navigationMenu.addEventListener('close-menu', this._closeMobileMenu.bind(this));
-    this.navigationMenu.addEventListener('nav-click', this._navClickHandler.bind(this));
+    const { header, skipToContent, navigationMenu } = this._elements;
+
+    window.addEventListener('scroll', () => this._toggleHeaderScrolledState(header));
+    skipToContent.addEventListener('click', (e) => this._handleSkipToContentClick(e));
+    this._media.addEventListener('change', (e) => this._updateTopNavMenuState(e.matches));
+    navigationMenu.addEventListener('btn-open-menu-click', this._openMobileMenu.bind(this));
+    navigationMenu.addEventListener('btn-close-menu-click', this._closeMobileMenu.bind(this));
+    navigationMenu.addEventListener('nav-click', this._handleNavClick.bind(this));
+  }
+
+  _toggleHeaderScrolledState(headerElement) {
+    headerElement.classList.toggle('scrolled', window.scrollY > 0);
+  }
+
+  _handleSkipToContentClick(event) {
+    event.preventDefault();
+    const { main } = this._elements;
+    main.focus();
+    main.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  _updateTopNavMenuState(isSmallScreen) {
+    const { topNavMenu } = this._elements;
+
+    if (isSmallScreen) {
+      topNavMenu.setAttribute('inert', '');
+      topNavMenu.style.transition = 'none';
+    } else {
+      this._closeMobileMenu();
+      topNavMenu.removeAttribute('inert');
+    }
   }
 
   _openMobileMenu() {
-    this.btnOpen.setAttribute('aria-expanded', 'true');
-    this.topNavMenu.removeAttribute('inert');
-    this.topNavMenu.removeAttribute('style');
-    this.skipToContent.setAttribute('inert', '');
-    this.brandLogo.setAttribute('inert', '');
-    this.btnOpen.setAttribute('inert', '');
-    this.btnClose.removeAttribute('inert');
-    this.mainComponent.setAttribute('inert', '');
-    disableBodyScroll(this.body);
-    this.btnClose.focus();
+    const { btnOpen, btnClose, topNavMenu, body } = this._elements;
+
+    btnOpen.setAttribute('aria-expanded', 'true');
+    topNavMenu.removeAttribute('style');
+    this._setInertState(true, [btnClose, topNavMenu]);
+    btnClose.focus();
+    disableBodyScroll(body);
   }
 
   _closeMobileMenu() {
-    this.btnOpen.setAttribute('aria-expanded', 'false');
-    this.topNavMenu.setAttribute('inert', '');
-    this.skipToContent.removeAttribute('inert');
-    this.brandLogo.removeAttribute('inert');
-    this.btnOpen.removeAttribute('inert', '');
-    this.btnClose.removeAttribute('inert');
-    this.mainComponent.removeAttribute('inert');
-    enableBodyScroll(this.body);
-    this.btnOpen.focus();
+    const { btnOpen, btnClose, topNavMenu, body } = this._elements;
+
+    btnOpen.setAttribute('aria-expanded', 'false');
+    this._setInertState(false, [btnClose, topNavMenu]);
+    btnOpen.focus();
+    enableBodyScroll(body);
 
     setTimeout(() => {
-      this.topNavMenu.style.transition = 'none';
+      topNavMenu.style.transition = 'none';
     }, 500);
   }
 
-  _navClickHandler() {
-    if (this.media.matches) {
+  _handleNavClick() {
+    if (this._media.matches) {
       this._closeMobileMenu();
     }
   }
 
-  _setupTopNav(e) {
-    if (e.matches) {
-      this.topNavMenu.setAttribute('inert', '');
-      this.topNavMenu.style.transition = 'none';
+  _setInertState(isInert, specificElements = []) {
+    const { skipToContent, brandLogo, btnOpen, main } = this._elements;
+    const elements = [skipToContent, brandLogo, btnOpen, main];
+
+    if (isInert) {
+      specificElements[0].removeAttribute('inert');
+      specificElements[1].removeAttribute('inert');
     } else {
-      this._closeMobileMenu();
-      this.topNavMenu.removeAttribute('inert');
+      specificElements[0].setAttribute('inert', '');
+      specificElements[1].setAttribute('inert', '');
     }
-  }
-
-  _headerScrollHandler() {
-    window.scrollY > 0
-      ? this.header.classList.add('scrolled')
-      : this.header.classList.remove('scrolled');
+    elements.forEach((el) =>
+      isInert ? el.setAttribute('inert', '') : el.removeAttribute('inert'),
+    );
   }
 }
 

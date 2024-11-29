@@ -1,6 +1,6 @@
 import { emptyContent } from '../utils/emptyContent';
 
-class HomePage extends HTMLElement {
+export default class HomePage extends HTMLElement {
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: 'open' });
@@ -19,5 +19,3 @@ class HomePage extends HTMLElement {
     `;
   }
 }
-
-customElements.define('home-page', HomePage);

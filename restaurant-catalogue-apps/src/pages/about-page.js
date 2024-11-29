@@ -1,7 +1,7 @@
 import styles from '../assets/styles/components/about-page.styles.scss';
 import { emptyContent } from '../utils/emptyContent';
 
-class Aboutpage extends HTMLElement {
+export default class Aboutpage extends HTMLElement {
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: 'open' });
@@ -82,5 +82,3 @@ class Aboutpage extends HTMLElement {
     `;
   }
 }
-
-customElements.define('about-page', Aboutpage);

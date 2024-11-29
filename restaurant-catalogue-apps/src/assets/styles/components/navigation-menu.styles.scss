@@ -1,6 +1,6 @@
-@use "../utils/variables" as v;
-@use "../utils/mixins" as m;
-@use "../utils/functions" as f;
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
 
 @include m.box-sizing-inherit;
 @include m.focus-style;
@@ -25,7 +25,7 @@
     height: 1.8rem;
   }
 
-  &__open[aria-expanded="true"] {
+  &__btnOpen[aria-expanded='true'] {
     + .topnav__menu {
       translate: 0;
 
@@ -55,7 +55,7 @@
     }
   }
 
-  &__close {
+  &__btnClose {
     margin-inline-start: auto;
     margin-block-end: 8rem;
   }

@@ -1,12 +1,12 @@
-import brandLogo from "../../public/svg/logo-no-background.svg";
-import styles from "../assets/styles/components/brand-logo.styles.scss";
-import { emptyContent } from "../utils/emptyContent";
+import brandLogo from '../../public/svg/logo-brand-transparent.svg';
+import styles from '../assets/styles/components/brand-logo.styles.scss';
+import { emptyContent } from '../utils/emptyContent';
 
 class BrandLogo extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
     this.render();
   }
 
@@ -23,4 +23,4 @@ class BrandLogo extends HTMLElement {
   }
 }
 
-customElements.define("brand-logo", BrandLogo);
+customElements.define('brand-logo', BrandLogo);
