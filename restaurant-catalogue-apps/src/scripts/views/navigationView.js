@@ -1,6 +1,6 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock-upgrade';
 
-class NavigationView {
+export default class NavigationView {
   _smallBreakpoint = '(width <= 37.4988em)';
   _elements;
   _media;
@@ -20,83 +20,104 @@ class NavigationView {
       skipToContent: skipToContentButton,
       navigationMenu: navigationMenuElement,
       brandLogo: brandLogoElement,
-      btnOpen: navigationMenuElement.shadowRoot.querySelector('#btnOpen'),
-      btnClose: navigationMenuElement.shadowRoot.querySelector('#btnClose'),
+      btnOpen: navigationMenuElement.shadowRoot.getElementById('btnOpen'),
+      btnClose: navigationMenuElement.shadowRoot.getElementById('btnClose'),
       topNavMenu: navigationMenuElement.shadowRoot.querySelector('.topnav__menu'),
     };
+
+    this._handleOpenMobileMenu = this._onOpenMobileMenu.bind(this);
+    this._handleCloseMobileMenu = this._onCloseMobileMenu.bind(this);
+
     this._media = window.matchMedia(this._smallBreakpoint);
   }
 
   initialize() {
-    this._updateTopNavMenuState(this._media.matches);
     this._addEventListeners();
   }
 
   _addEventListeners() {
-    const { header, skipToContent, navigationMenu } = this._elements;
+    const { skipToContent, navigationMenu } = this._elements;
 
-    window.addEventListener('scroll', () => this._toggleHeaderScrolledState(header));
-    skipToContent.addEventListener('click', (e) => this._handleSkipToContentClick(e));
-    this._media.addEventListener('change', (e) => this._updateTopNavMenuState(e.matches));
-    navigationMenu.addEventListener('btn-open-menu-click', this._openMobileMenu.bind(this));
-    navigationMenu.addEventListener('btn-close-menu-click', this._closeMobileMenu.bind(this));
-    navigationMenu.addEventListener('nav-click', this._handleNavClick.bind(this));
+    window.addEventListener('scroll', this._onToggleHeaderScrolledState.bind(this));
+    this._media.addEventListener('change', this._onNavMenuUpdateState.bind(this));
+    skipToContent.addEventListener('click', this._onSkipToContentClick.bind(this));
+    navigationMenu.addEventListener('click-nav-item', this._onNavClick.bind(this));
+
+    this._onNavMenuUpdateState(this._media);
   }
 
-  _toggleHeaderScrolledState(headerElement) {
+  _onToggleHeaderScrolledState() {
+    const headerElement = this._elements.header;
     headerElement.classList.toggle('scrolled', window.scrollY > 0);
   }
 
-  _handleSkipToContentClick(event) {
+  _onNavMenuUpdateState(event) {
+    const { topNavMenu, navigationMenu } = this._elements;
+    const isSmallScreen = event.matches;
+
+    navigationMenu.removeEventListener('click-open-nav-btn', this._handleOpenMobileMenu);
+    navigationMenu.removeEventListener('click-close-nav-btn', this._handleCloseMobileMenu);
+
+    if (isSmallScreen) {
+      topNavMenu.setAttribute('inert', '');
+      topNavMenu.style.transition = 'none';
+
+      navigationMenu.addEventListener('click-open-nav-btn', this._handleOpenMobileMenu);
+    } else {
+      this._onCloseMobileMenu();
+      topNavMenu.removeAttribute('inert');
+
+      navigationMenu.addEventListener('click-close-nav-btn', this._handleCloseMobileMenu);
+    }
+  }
+
+  _onSkipToContentClick(event) {
     event.preventDefault();
     const { main } = this._elements;
     main.focus();
     main.scrollIntoView({ behavior: 'smooth' });
   }
 
-  _updateTopNavMenuState(isSmallScreen) {
-    const { topNavMenu } = this._elements;
-
-    if (isSmallScreen) {
-      topNavMenu.setAttribute('inert', '');
-      topNavMenu.style.transition = 'none';
-    } else {
-      this._closeMobileMenu();
-      topNavMenu.removeAttribute('inert');
-    }
-  }
-
-  _openMobileMenu() {
-    const { btnOpen, btnClose, topNavMenu, body } = this._elements;
+  _onOpenMobileMenu() {
+    const { btnOpen, btnClose, topNavMenu, body, navigationMenu } = this._elements;
 
     btnOpen.setAttribute('aria-expanded', 'true');
     topNavMenu.removeAttribute('style');
     this._setInertState(true, [btnClose, topNavMenu]);
-    btnClose.focus();
     disableBodyScroll(body);
+    btnClose.focus();
+
+    navigationMenu.removeEventListener('click-open-nav-btn', this._handleOpenMobileMenu);
+
+    navigationMenu.addEventListener('click-close-nav-btn', this._handleCloseMobileMenu);
   }
 
-  _closeMobileMenu() {
-    const { btnOpen, btnClose, topNavMenu, body } = this._elements;
+  _onCloseMobileMenu() {
+    const { btnOpen, btnClose, topNavMenu, body, navigationMenu } = this._elements;
 
     btnOpen.setAttribute('aria-expanded', 'false');
     this._setInertState(false, [btnClose, topNavMenu]);
-    btnOpen.focus();
     enableBodyScroll(body);
+    btnOpen.focus();
+
+    navigationMenu.removeEventListener('click-close-nav-btn', this._handleCloseMobileMenu);
+
+    navigationMenu.addEventListener('click-open-nav-btn', this._handleOpenMobileMenu);
 
     setTimeout(() => {
       topNavMenu.style.transition = 'none';
     }, 500);
   }
 
-  _handleNavClick() {
+  _onNavClick() {
     if (this._media.matches) {
-      this._closeMobileMenu();
+      this._onCloseMobileMenu();
     }
   }
 
   _setInertState(isInert, specificElements = []) {
     const { skipToContent, brandLogo, btnOpen, main } = this._elements;
+
     const elements = [skipToContent, brandLogo, btnOpen, main];
 
     if (isInert) {
@@ -111,5 +132,3 @@ class NavigationView {
     );
   }
 }
-
-export default NavigationView;

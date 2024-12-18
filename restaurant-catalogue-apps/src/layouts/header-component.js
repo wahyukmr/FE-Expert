@@ -1,5 +1,4 @@
 import styles from '../assets/styles/components/header-component.styles.scss';
-import { emptyContent } from '../utils/emptyContent';
 
 class HeaderComponent extends HTMLElement {
   constructor() {
@@ -10,10 +9,8 @@ class HeaderComponent extends HTMLElement {
   }
 
   render() {
-    emptyContent(this);
     this._style.textContent = styles;
     this._shadowRoot.appendChild(this._style);
-
     this._shadowRoot.innerHTML += `
       <header class="header">
         <slot></slot>

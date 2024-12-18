@@ -16,7 +16,9 @@ class LoaderSection extends HTMLElement {
     this._shadowRoot.appendChild(this._style);
 
     this._shadowRoot.innerHTML += `
-      <div class="custom-loader"></div>
+      <div class="container">
+        <div class="custom-loader"></div>
+      </div>
     `;
   }
 }

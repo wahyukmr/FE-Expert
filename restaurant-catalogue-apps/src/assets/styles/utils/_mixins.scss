@@ -12,6 +12,12 @@
   }
 }
 
+@mixin container-style($padding, $max-width) {
+  max-width: $max-width;
+  padding-inline: $padding;
+  margin-inline: auto;
+}
+
 @mixin breakpoint($size, $property, $direction: up) {
   @if $direction == up {
     @media ($property: map.get(v.$breakpoints, $size)) {
@@ -42,10 +48,9 @@
   a:focus-visible,
   [role='button']:focus-visible,
   [role='link']:focus-visible,
-  input:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid v.$primary-100;
-    outline-offset: 4px;
+    outline: f.rem(2) solid v.$primary-100;
+    outline-offset: f.rem(4);
   }
 }
 
@@ -57,7 +62,7 @@
 
 @mixin button-style() {
   display: inline-block;
-  font-family: 'Open Sans', sans-serif;
+  font-family: inherit;
   font-size: v.$subHeading-font-size;
   cursor: pointer;
 }
@@ -77,52 +82,51 @@
 }
 
 @mixin link-reset-style {
+  display: inline-block;
   text-decoration: none;
   color: inherit;
-
-  &:visited,
-  &:active {
-    text-decoration: none;
-  }
 }
 
 @mixin input-style {
   display: block;
-  font: inherit;
+  font-family: inherit;
+
+  &:focus {
+    caret-color: v.$text-100;
+  }
 
   &::placeholder {
-    font: inherit;
+    font-family: inherit;
+    color: v.$text-200;
+    font-size: v.$subHeading-font-size;
+    letter-spacing: 0;
+  }
+
+  &::-webkit-input-placeholder {
+    color: v.$text-200;
+  }
+
+  &::-moz-placeholder {
+    color: v.$text-200;
   }
 }
 
 @mixin heading-style($type) {
   line-height: v.$heading-line-height;
 
-  // @if $type == h1 {
-  //   font-size: clamp(f.rem(32), f.rem(24) + 3vw, f.rem(64));
-  // }
-  // @if $type == h2 {
-  //   font-size: clamp(f.rem(28), f.rem(20) + 2.5vw, f.rem(48));
-  // }
-  // @if $type == h3 {
-  //   font-size: clamp(f.rem(24), f.rem(16) + 2vw, f.rem(36));
-  // }
-
-  // mobile-first
   @if $type == h1 {
     font-family: 'Namdhinggo-Bold', serif;
     font-size: clamp(f.rem(28), f.rem(20) + 3vw, f.rem(56));
+    letter-spacing: 1.2px;
   }
   @if $type == h2 {
     font-family: 'Namdhinggo-SemiBold', serif;
     font-size: clamp(f.rem(24), f.rem(16) + 2.5vw, f.rem(44));
   }
-}
-
-@mixin container-style($padding, $max-width) {
-  max-width: $max-width;
-  padding: 0 $padding;
-  margin: 0 auto;
+  @if $type == h3 {
+    font-family: 'Namdhinggo-SemiBold', serif;
+    font-size: clamp(f.rem(24), f.rem(16) + 2vw, f.rem(32));
+  }
 }
 
 @mixin flex-item($columns, $grid-gap) {
@@ -130,5 +134,28 @@
 
   @include breakpoint(small) {
     flex: 0 0 calc(100% / $grid-columns * $columns - #{$grid-gap});
+  }
+}
+
+@mixin fadeInUp-animation {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@mixin skeleton {
+  .skeleton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, v.$bg-200 20%, v.$bg-300 50%, v.$bg-200 80%);
+    background-size: 200% 100%;
+    border-radius: 10px;
+    animation: skeleton-loading 1.5s infinite;
+
+    &.hidden {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
   }
 }

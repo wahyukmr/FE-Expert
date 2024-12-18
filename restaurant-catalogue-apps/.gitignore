@@ -1,6 +1,7 @@
 # For IDE
 .vscode
 .idea
+.env
 
 # For web application
 dist

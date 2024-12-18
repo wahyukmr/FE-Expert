@@ -1,0 +1,192 @@
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
+
+@include m.box-sizing-inherit;
+@include m.focus-style;
+@include m.skeleton;
+
+@keyframes skeleton-loading {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.restaurant-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background-color: v.$bg-300;
+  border-radius: f.rem(16);
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(96, 20, 21, 0.3);
+  transition: box-shadow 0.3s ease;
+
+  @include m.breakpoint(medium, max-width, down) {
+    max-width: f.rem(350);
+  }
+
+  &:hover {
+    box-shadow: 0 0px 15px 1px rgb(255, 138, 95);
+  }
+
+  &__picture {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: f.rem(200);
+    overflow: hidden;
+
+    @include m.breakpoint(small, min-width) {
+      height: f.rem(250);
+    }
+    @include m.breakpoint(medium, min-width) {
+      height: f.rem(280);
+    }
+    @include m.breakpoint(large, min-width) {
+      height: f.rem(300);
+    }
+  }
+
+  &__image {
+    object-fit: fill;
+    @include m.image-style(100%, 100%);
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.2rem;
+  }
+
+  &__location {
+    position: absolute;
+    right: 0;
+    top: -39px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: v.$spacing-8;
+    background: v.$bg-300;
+    border-top-left-radius: f.rem(8);
+    border-bottom-left-radius: f.rem(8);
+    border-top-right-radius: f.rem(8);
+    padding-inline: v.$spacing-24;
+    box-shadow:
+      rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
+
+    @include m.breakpoint(xsmall, min-width) {
+      top: -47px;
+      height: 48px;
+    }
+
+    & svg {
+      fill: v.$primary-300;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+  }
+
+  &__city {
+    font-size: v.$subHeading-font-size;
+    color: v.$primary-300;
+    font-weight: 500;
+  }
+
+  &__header {
+    font-weight: 700;
+    color: v.$primary-200;
+    max-width: 70%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    @include m.heading-style(h3);
+    @include m.breakpoint(small, min-width) {
+      margin-block: f.rem(10);
+    }
+  }
+
+  &__description {
+    font-size: v.$subHeading-font-size;
+    color: v.$text-100;
+    margin: 0.5rem 0;
+    max-height: 5.6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__rating {
+    display: inline-flex;
+    align-items: center;
+    color: v.$accent-100;
+    font-weight: 600;
+
+    &::before {
+      content: '⭐';
+      margin-right: 0.3rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include m.breakpoint(small, min-width) {
+      margin-top: v.$spacing-24;
+    }
+
+    &-favorite {
+      height: f.rem(44);
+      width: f.rem(44);
+      background-color: v.$text-100;
+      border-radius: f.rem(8);
+
+      & svg {
+        fill: #ff6b6b;
+      }
+    }
+  }
+}
+
+.actions__cta {
+  &-anchor {
+    @include m.link-reset-style;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: v.$spacing-8;
+    height: f.rem(44);
+    background-color: v.$text-100;
+    padding-inline: 1.2rem;
+    margin-left: auto;
+    border-radius: f.rem(8);
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &-text {
+    display: block;
+    font-size: v.$subHeading-font-size;
+    font-weight: 600;
+    color: v.$bg-300;
+  }
+  &-svg {
+    width: f.rem(18);
+    height: f.rem(18);
+    color: v.$bg-300;
+  }
+}

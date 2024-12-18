@@ -7,7 +7,13 @@
 
 .about-section {
   color: v.$text-100;
-  margin: v.$spacing-64 auto v.$spacing-96;
+  padding-top: v.$spacing-64;
+  padding-bottom: v.$spacing-80;
+
+  @include m.breakpoint(small, min-width) {
+    padding-top: v.$spacing-80;
+    padding-bottom: v.$spacing-96;
+  }
 
   &__container {
     @include m.container-style(v.$spacing-24, f.rem(900));
@@ -80,7 +86,9 @@
     text-decoration: none;
     font-weight: 600;
     border-bottom: 1px solid transparent;
-    transition: color 0.3s ease, border-color 0.3s ease;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease;
 
     &:hover {
       color: v.$primary-100;
@@ -92,14 +100,16 @@
   &__heading--secondary,
   &__text,
   &__descriptions {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s ease forwards;
+    @include m.fadeInUp-animation;
   }
 }
 
 @keyframes fadeInUp {
-  to {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }

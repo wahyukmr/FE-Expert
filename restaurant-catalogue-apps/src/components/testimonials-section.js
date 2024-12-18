@@ -1,5 +1,9 @@
 import styles from '../assets/styles/components/testimonials-section.styles.scss';
+import { lazysizesForShadowDom } from '../utils';
 import { emptyContent } from '../utils/emptyContent';
+import jamesBrown from '../assets/images/james-brown.jpg';
+import mariaLopez from '../assets/images/maria-lopez.jpg';
+import lisaChen from '../assets/images/lisa-chen.jpg';
 
 class TestimonialsSection extends HTMLElement {
   constructor() {
@@ -7,6 +11,10 @@ class TestimonialsSection extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._style = document.createElement('style');
     this.render();
+  }
+
+  connectedCallback() {
+    lazysizesForShadowDom(this._shadowRoot, '.testimonial__picture');
   }
 
   render() {
@@ -24,7 +32,24 @@ class TestimonialsSection extends HTMLElement {
           </p>
           <div class="testimonial">
             <article class="testimonial__card">
-              <img src="../../public/images/maria-lopez.jpg" alt="Profile picture of Maria Lopez" class="testimonial__avatar" />
+              <div class="wrapper">
+                <picture class="testimonial__picture">
+                  <div class="skeleton"></div>
+                  <source
+                    class="lazyload"
+                    type="image/webp"
+                    data-srcset="${mariaLopez}?as=webp">
+                  <source
+                    class="lazyload"
+                    type="image/jpeg"
+                    data-srcset="${mariaLopez}">
+                  <img
+                    data-src="${mariaLopez}" alt="Profile picture of Maria Lopez"
+                    width="120"
+                    height="120"
+                    class="testimonial__picture-avatar lazyload">
+                </picture>
+              </div>
               <div class="testimonial__profile">
                 <h3 class="testimonial__name">Maria Lopez</h3>
                 <p class="testimonial__role">Food Blogger</p>
@@ -34,7 +59,25 @@ class TestimonialsSection extends HTMLElement {
               </p>
             </article>
             <article class="testimonial__card">
-              <img src="../../public/images/james-brown.jpg" alt="Profile picture of James Brown" class="testimonial__avatar" />
+              <div class="wrapper">
+                <picture class="testimonial__picture">
+                  <div class="skeleton"></div>
+                  <source
+                    class="lazyload"
+                    type="image/webp"
+                    data-srcset="${jamesBrown}?as=webp">
+                  <source
+                    class="lazyload"
+                    type="image/jpeg"
+                    data-srcset="${jamesBrown}">
+                  <img
+                    data-src="${jamesBrown}" alt="Profile picture of James Brown"
+                    loading="lazy"
+                    width="120"
+                    height="120"
+                    class="testimonial__picture-avatar lazyload">
+                </picture>
+              </div>
               <div class="testimonial__profile">
                 <h3 class="testimonial__name">James Brown</h3>
                 <p class="testimonial__role">Frequent Diner</p>
@@ -44,7 +87,25 @@ class TestimonialsSection extends HTMLElement {
               </p>
             </article>
             <article class="testimonial__card">
-              <img src="../../public/images/lisa-chen.jpg" alt="Profile picture of Lisa Chen" class="testimonial__avatar" />
+              <div class="wrapper">
+                <picture class="testimonial__picture">
+                  <div class="skeleton"></div>
+                  <source
+                    class="lazyload"
+                    type="image/webp"
+                    data-srcset="${lisaChen}?as=webp">
+                  <source
+                    class="lazyload"
+                    type="image/jpeg"
+                    data-srcset="${lisaChen}">
+                  <img
+                    data-src="${lisaChen}" alt="Profile picture of Lisa Chen"
+                    loading="lazy"
+                    width="120"
+                    height="120"
+                    class="testimonial__picture-avatar lazyload">
+                </picture>
+              </div>
               <div class="testimonial__profile">
                 <h3 class="testimonial__name">Lisa Chen</h3>
                 <p class="testimonial__role">Chef</p>

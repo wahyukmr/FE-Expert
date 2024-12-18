@@ -78,13 +78,13 @@
   }
 
   &__link {
+    @include m.link-reset-style;
     display: flex;
     align-items: center;
     min-height: f.rem(44);
     min-width: f.rem(44);
     padding-inline: v.$spacing-16;
     font-weight: 600;
-    @include m.link-reset-style;
 
     &:hover {
       color: v.$primary-300;

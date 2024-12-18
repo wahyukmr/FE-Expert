@@ -12,7 +12,6 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     static: path.resolve(__dirname, 'dist'),
-    open: true,
     compress: true,
     client: {
       overlay: {
@@ -36,13 +35,21 @@ module.exports = merge(common, {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024,
+          },
+        },
         generator: {
           filename: 'assets/images/[name].[ext]',
         },
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /styles\.s[ac]ss$/i,
-        exclude: /node_modules/,
         type: 'asset/source',
         use: 'sass-loader',
       },

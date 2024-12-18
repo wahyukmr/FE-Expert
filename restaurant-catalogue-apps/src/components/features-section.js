@@ -1,9 +1,10 @@
 import styles from '../assets/styles/components/features-section.styles.scss';
 import { emptyContent } from '../utils/emptyContent';
-import favorite from '../assets/svg/favorite.svg';
-import search from '../assets/svg/search.svg';
-import upToDate from '../assets/svg/up_to_date.svg';
-import feedback from '../assets/svg/feedback.svg';
+import favorite from '../assets/svg/favorite-feature.svg';
+import search from '../assets/svg/search-feature.svg';
+import upToDate from '../assets/svg/up_to_date-feature.svg';
+import feedback from '../assets/svg/feedback-feature.svg';
+import { lazysizesForShadowDom } from '../utils';
 
 class FeaturesSection extends HTMLElement {
   constructor() {
@@ -11,6 +12,10 @@ class FeaturesSection extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._style = document.createElement('style');
     this.render();
+  }
+
+  connectedCallback() {
+    lazysizesForShadowDom(this._shadowRoot, '.feature__illustration');
   }
 
   render() {
@@ -24,7 +29,12 @@ class FeaturesSection extends HTMLElement {
         <div class="features__container">
           <div class="feature">
             <div class="feature__illustration">
-              <img src=${search} alt="Search & Filter">
+              <div class="skeleton"></div>
+              <img
+                data-src="${search}" alt="Search & Filter"
+                class="feature__image lazyload"
+                width="auto"
+                height="auto">
             </div>
             <div class="feature__content">
               <h2>Search & Filter</h2>
@@ -54,11 +64,21 @@ class FeaturesSection extends HTMLElement {
               </div>
             </div>
             <div class="feature__illustration">
-              <img src=${favorite} alt="Favorite Your Choices">
+              <div class="skeleton"></div>
+              <img
+                data-src="${favorite}" alt="Favorite Your Choices"
+                class="feature__image lazyload"
+                width="auto"
+                height="auto">
             </div>
             
             <div class="feature__illustration">
-              <img src=${upToDate} alt="Up-to-Date Information">
+              <div class="skeleton"></div>
+              <img
+                data-src="${upToDate}" alt="Up-to-Date Information"
+                class="feature__image lazyload"
+                width="auto"
+                height="auto">
             </div>
             <div class="feature__content">
               <h2>Up-to-Date Information</h2>
@@ -82,7 +102,12 @@ class FeaturesSection extends HTMLElement {
               </div>
             </div>
             <div class="feature__illustration">
-              <img src=${feedback} alt="Favorite Your Choices">
+              <div class="skeleton"></div>
+              <img
+                data-src="${feedback}" alt="Favorite Your Choices"
+                class="feature__image lazyload"
+                width="auto"
+                height="auto">
             </div>
           </div>
         </div>

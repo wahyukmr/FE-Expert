@@ -19,7 +19,8 @@ export default class FavoritePage extends HTMLElement {
       <section class="favorite-section">
         <div class="favorite-section__container">
           <h1 class="favorite-section__heading">Your Favorite Restaurants</h1>
-          <p class="favorite-section__text">This feature will be implemented in future submissions.</p>
+          
+          <list-restaurant-container></list-restaurant-container>
         </div>
       </section>
     `;

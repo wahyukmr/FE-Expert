@@ -1,5 +1,4 @@
 import styles from '../assets/styles/components/footer-component.styles.scss';
-import { emptyContent } from '../utils/emptyContent';
 
 class FooterComponent extends HTMLElement {
   constructor() {
@@ -10,8 +9,6 @@ class FooterComponent extends HTMLElement {
   }
 
   render() {
-    emptyContent(this);
-
     this._style.textContent = styles;
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `

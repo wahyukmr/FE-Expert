@@ -3,6 +3,16 @@
 @use '../utils/functions' as f;
 
 @include m.box-sizing-inherit;
+@include m.skeleton;
+
+@keyframes skeleton-loading {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
 
 .features {
   display: block;
@@ -40,6 +50,10 @@
 
   &__illustration {
     position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    margin-inline: auto;
 
     &::before {
       content: '';
@@ -56,7 +70,7 @@
       background: radial-gradient(circle, rgb(95, 20, 21) 30%, rgb(76, 0, 0, 0.1) 90%);
       backdrop-filter: blur(6px) saturate(105%);
       -webkit-backdrop-filter: blur(6px);
-      z-index: -2;
+      z-index: -1;
     }
 
     &:nth-child(4) {
@@ -70,14 +84,15 @@
         grid-row: 7;
       }
     }
+  }
 
-    & img {
-      margin: auto;
-      @include m.image-style(70%, auto);
+  &__image {
+    margin-inline: auto;
+    object-fit: cover;
+    @include m.image-style(80%, auto);
 
-      @include m.breakpoint(small, min-width) {
-        @include m.image-style(100%, auto);
-      }
+    @include m.breakpoint(small, min-width) {
+      @include m.image-style(100%, auto);
     }
   }
 

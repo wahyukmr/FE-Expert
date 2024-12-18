@@ -34,6 +34,7 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "idb": "^8.0.0",
     "regenerator-runtime": "^0.14.1",
     "workbox-precaching": "^7.3.0",

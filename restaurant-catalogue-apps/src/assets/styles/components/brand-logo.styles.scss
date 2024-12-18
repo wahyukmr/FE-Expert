@@ -6,7 +6,6 @@
 @include m.focus-style;
 
 .brand-logo {
-  display: inline-block;
   @include m.link-reset-style;
 
   &:hover {

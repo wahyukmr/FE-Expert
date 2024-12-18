@@ -1,14 +1,23 @@
 import { ROUTE } from '../config/constants.js';
+import { showErrorNotification } from '../utils/notifications.js';
+import serviceWorkerRegister from '../utils/service-worker-register.js';
 
 export default class Router {
   constructor(routeHandlers, mainElement) {
     this._routes = routeHandlers;
     this._mainElement = mainElement;
+    this._handleRouteChange = this._handleRouteChange.bind(this);
   }
 
   startListening() {
-    window.addEventListener('hashchange', this._handleRouteChange.bind(this));
-    window.addEventListener('load', this._handleRouteChange.bind(this));
+    window.addEventListener('hashchange', async () => {
+      await this._handleRouteChange();
+      window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+    });
+    window.addEventListener('load', async () => {
+      await this._handleRouteChange();
+      await serviceWorkerRegister();
+    });
   }
 
   async _handleRouteChange() {
@@ -23,10 +32,13 @@ export default class Router {
     }
 
     if (pageLoader) {
+      this._mainElement.innerHTML = '';
+      const loaderElement = document.createElement('loader-section');
+      this._mainElement.appendChild(loaderElement);
+
       try {
         const { default: Page } = await pageLoader();
         const componentName = this._getComponentName(path);
-        console.log(componentName);
 
         if (!customElements.get(componentName)) {
           customElements.define(componentName, Page);
@@ -41,10 +53,10 @@ export default class Router {
 
         this._mainElement.appendChild(pageElement);
       } catch (error) {
-        console.log(error);
+        showErrorNotification(error.message);
       }
     } else {
-      console.error(`Route ${path} not found`);
+      showErrorNotification(`Route ${path} not found`);
     }
   }
 
@@ -76,9 +88,9 @@ export default class Router {
       case FAVORITE:
         return 'favorite-page';
       case RESTO_LIST:
-        return 'list-resto-page';
+        return 'resto-list-page';
       case RESTO_DETAIL:
-        return 'detail-resto-page';
+        return 'resto-detail-page';
       case ABOUT:
         return 'about-page';
       default:

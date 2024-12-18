@@ -1,4 +1,4 @@
-import styles from '../assets/styles/components/favorite-page.styles.scss';
+import styles from '../assets/styles/components/restaurant-detail-page.styles.scss';
 import { emptyContent } from '../utils/emptyContent';
 
 export default class RestoDetailPage extends HTMLElement {
@@ -9,6 +9,10 @@ export default class RestoDetailPage extends HTMLElement {
     this.render();
   }
 
+  connectedCallback() {}
+
+  disconnectedCallback() {}
+
   render() {
     emptyContent(this);
 
@@ -16,10 +20,10 @@ export default class RestoDetailPage extends HTMLElement {
     this._shadowRoot.appendChild(this._style);
 
     this._shadowRoot.innerHTML += `
-      <section class="favorite-section">
-        <div class="favorite-section__container">
-          <h1 class="favorite-section__heading">Detail Restaurant</h1>
-          <p class="favorite-section__text">This feature will be implemented in future submissions.</p>
+      <section class="detail-page">
+        <div class="detail-page__container">
+          <h1 class="detail-page__heading">Restaurant Detail</h1>
+          <div id="restaurantDetailContainer" class="detail-page__restaurant"></div>
         </div>
       </section>
     `;

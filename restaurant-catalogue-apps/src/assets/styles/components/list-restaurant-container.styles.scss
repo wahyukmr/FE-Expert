@@ -1,0 +1,52 @@
+@use '../utils/variables' as v;
+@use '../utils/mixins' as m;
+@use '../utils/functions' as f;
+
+@include m.box-sizing-inherit;
+
+.list-item {
+  &__container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(f.rem(260), 1fr));
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    gap: v.$spacing-32;
+    border-radius: f.rem(6);
+    border: 2px solid v.$bg-200;
+    height: f.rem(600);
+    padding: v.$spacing-8;
+    margin-top: v.$spacing-32;
+    overflow-y: auto;
+
+    @include m.breakpoint(xsmall, min-width) {
+      padding: v.$spacing-16;
+      grid-template-columns: repeat(auto-fit, minmax(f.rem(320), f.rem(320)));
+    }
+
+    @include m.breakpoint(small, min-width) {
+      margin-top: v.$spacing-48;
+    }
+
+    @include m.breakpoint(medium, min-width) {
+      padding: v.$spacing-24;
+      margin-top: v.$spacing-64;
+      grid-template-columns: repeat(auto-fit, f.rem(400));
+    }
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: v.$bg-200;
+      border-radius: f.rem(24);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: v.$bg-300;
+      border-radius: f.rem(24);
+    }
+  }
+}
